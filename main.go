@@ -14,7 +14,7 @@ const (
   winnerFieldId = "57238811"
   loserFieldId = "57239047"
   jumpToFieldId = "57239858"
-  authToken = "Bearer nNg6fpPww9b1bBYv835EbE0avhZjZG_IX6EbaZ_PmYA="
+  authToken = "Bearer A9JeLy7TDc44VsA7kifsXAgfRwXoLRKMuqTCmKrTJnjR"
   formURL = "https://api.typeform.com/forms/DOfp3b"
 )
 
@@ -198,6 +198,12 @@ func updateForm(NewChallenger string) {
     for i, logic := range f.Logic {
       if logic.Ref == loserFieldRef {
         f.Logic[i].Actions = append(logic.Actions, newLogicJump)
+      }
+    }
+
+    for i, tys := range f.ThankyouScreens {
+      if tys.ref == "default_tys" {
+        f.ThankyouScreens[len(f.ThankyouScreens)-1], f.ThankyouScreens[i] = f.ThankyouScreens[i], f.ThankyouScreens[len(f.ThankyouScreens)-1]
       }
     }
 
