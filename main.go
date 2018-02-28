@@ -202,11 +202,12 @@ func updateForm(NewChallenger string) {
     }
 
     for i, tys := range f.ThankyouScreens {
-      if tys.ref == "default_tys" {
-        f.ThankyouScreens[len(f.ThankyouScreens)-1], f.ThankyouScreens[i] = f.ThankyouScreens[i], f.ThankyouScreens[len(f.ThankyouScreens)-1]
+      if tys.Ref == "default_tys" {
+        log.Println("helloooooooo")
+        f.ThankyouScreens = append(f.ThankyouScreens[:i], f.ThankyouScreens[i+1:]...)
       }
     }
-
+    
     updatedForm, err :=json.Marshal(f)
     if err != nil {
       log.Println(err)
@@ -262,6 +263,11 @@ func handler(w http.ResponseWriter, req *http.Request) {
         }
       }
     }
+}
+
+func removeElement(s []int, i int) []int {
+    s[len(s)-1], s[i] = s[i], s[len(s)-1]
+    return s[:len(s)-1]
 }
 
 func main() {
